@@ -12,30 +12,10 @@ ROS/ROS 2 package for real-time object detection and segmentation using the Ultr
 ### Status
 | ROS distro | Industrial CI | Docker |
 | :--------: | :-----------: | :----: |
-|  ROS Melodic | [![ROS-melodic Industrial CI](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/melodic-ci.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/melodic-ci.yml) | [![ROS-melodic Docker Build Check](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/melodic-docker-build-check.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/melodic-docker-build-check.yml)
-|  ROS Noetic | [![ROS-noetic Industrial CI](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/noetic-ci.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/noetic-ci.yml) | [![ROS-noetic Docker Build Check](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/noetic-docker-build-check.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/noetic-docker-build-check.yml)
 |  ROS 2 Humble | [![ROS2-humble Industrial CI](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/humble-ci.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/humble-ci.yml) | [![ROS2-humble Docker Build Check](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/humble-docker-build-check.yml/badge.svg)](https://github.com/Alpaca-zip/ultralytics_ros/actions/workflows/humble-docker-build-check.yml)
 
 ## Setup ⚙
-### ROS Melodic
-```bash
-$ cd ~/{ROS_WORKSPACE}/src
-$ GIT_LFS_SKIP_SMUDGE=1 git clone -b melodic-devel https://github.com/Alpaca-zip/ultralytics_ros.git
-$ rosdep install -r -y -i --from-paths .
-$ pip install pipenv
-$ cd ultralytics_ros
-$ pipenv install
-$ pipenv shell
-$ cd ~/{ROS_WORKSPACE} && catkin build
-```
-### ROS Noetic
-```bash
-$ cd ~/{ROS_WORKSPACE}/src
-$ GIT_LFS_SKIP_SMUDGE=1 git clone -b noetic-devel https://github.com/Alpaca-zip/ultralytics_ros.git
-$ rosdep install -r -y -i --from-paths .
-$ python3 -m pip install -r ultralytics_ros/requirements.txt
-$ cd ~/{ROS_WORKSPACE} && catkin build
-```
+
 ### ROS 2 Humble
 ```bash
 $ cd ~/{ROS2_WORKSPACE}/src
@@ -47,15 +27,6 @@ $ cd ~/{ROS2_WORKSPACE} && $ colcon build
 **NOTE**: If you want to download KITTI datasets, remove `GIT_LFS_SKIP_SMUDGE=1` from the command line.
 
 ## Run 🚀
-### ROS Melodic & ROS Noetic
-**`tracker_node`**
-```bash
-$ roslaunch ultralytics_ros tracker.launch debug:=true
-```
-**`tracker_node` & `tracker_with_cloud_node`**
-```bash
-$ roslaunch ultralytics_ros tracker_with_cloud.launch debug:=true
-```
 ### ROS 2 Humble
 **`tracker_node`**
 ```bash
@@ -143,33 +114,12 @@ For yolov8, you can choose `yolov8*.pt`, `yolov8*-seg.pt`.
 [![dockeri.co](https://dockerico.blankenship.io/image/alpacazip/ultralytics_ros)](https://hub.docker.com/r/alpacazip/ultralytics_ros)
 
 ### Docker Pull & Run
-**ROS Melodic**
-```bash
-$ docker pull alpacazip/ultralytics_ros:melodic
-$ docker run -p 6080:80 --shm-size=512m alpacazip/ultralytics_ros:melodic
-```
-**ROS Noetic**
-```bash
-$ docker pull alpacazip/ultralytics_ros:noetic
-$ docker run -p 6080:80 --shm-size=512m alpacazip/ultralytics_ros:noetic
-```
 **ROS 2 Humble**
 ```bash
 $ docker pull alpacazip/ultralytics_ros:humble
 $ docker run -p 6080:80 --shm-size=512m alpacazip/ultralytics_ros:humble
 ```
 ### Run tracker_node & tracker_with_cloud_node
-**ROS Melodic**
-```bash
-$ roscd ultralytics_ros && pipenv shell
-$ roslaunch ultralytics_ros kitti_predict_with_cloud.launch
-$ cd ~/catkin_ws/src/ultralytics_ros/rosbag && rosbag play kitti_2011_09_26_drive_0106_synced.bag --clock --loop
-```
-**ROS Noetic**
-```bash
-$ roslaunch ultralytics_ros kitti_tracker_with_cloud.launch
-$ cd ~/catkin_ws/src/ultralytics_ros/rosbag && rosbag play kitti_2011_09_26_drive_0106_synced.bag --clock --loop
-```
 **ROS 2 Humble**
 ```bash
 $ ros2 launch ultralytics_ros kitti_tracker_with_cloud.launch.xml
